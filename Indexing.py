@@ -47,21 +47,20 @@ def search_engine(search_key, inverted_index, rows):
                 output_documents.append(rows[idx])
     return output_documents
 
+
 def return_new_csv(output_file, output_documents):
     with open(output_file, "w", newline='') as output_file:
             csv_writer = csv.writer(output_file)
             for row in output_documents:
                 csv_writer.writerow(row)
 
-def main():
-    file_path = 'csv_files/hbr.csv' # Relative Path
+def search(search_key):
+    file_path = 'csv_files\\hbr.csv' # Relative Path
     documents, rows = read_csv(file_path)
     inverted_index = create_inverted_index(documents)
-    # for term, postings in inverted_index.items():
-    #     print(f'{term}: {postings}')
-    output_documents = search_engine("blockchain technology", inverted_index, rows)
-    return_new_csv('search_results.csv', output_documents)
+    output_documents = search_engine(search_key, inverted_index, rows)
+    return output_documents
 
 if __name__ == "__main__":
-    main()
+    search("blockchain technology")
 
